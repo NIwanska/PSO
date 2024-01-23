@@ -16,7 +16,7 @@ def CDF(tests):
         for result in results:
             f_id = result['f_id']
             function_type = result['function_type']
-
+            plt.figure()
             for inertia_data in result['inertia']:
                 mode = inertia_data['mode']
                 mean_fitness = inertia_data['histories_means']
@@ -29,7 +29,7 @@ def CDF(tests):
             plt.ylabel('Funkcja celu')
             plt.legend()
             plt.savefig(f'./wykresy/krzywa_zbiegania{f_id}.png', format='png')
-            plt.show()
+    plt.show()
 
 
 def ECDF(tests):
@@ -40,7 +40,7 @@ def ECDF(tests):
             f_id = result['f_id']
             function_type = result['function_type']
 
-            plt.figure(figsize=(10, 6))
+            plt.figure()
 
             for inertia_data in result['inertia']:
                 mode = inertia_data['mode']
@@ -53,7 +53,7 @@ def ECDF(tests):
             plt.title(f'Krzywa ECDF - Funkcja {f_id} ({function_type})')
             plt.legend()
             plt.savefig(f'./wykresy/krzywa_ecdf{f_id}.png', format='png')
-            plt.show()
+    plt.show()
 
 
 def box_plot(tests):
@@ -64,6 +64,7 @@ def box_plot(tests):
             f_id = result['f_id']
             function_type = result['function_type']
             values = []
+            plt.figure()
             for inertia_data in result['inertia']:
                 mode = inertia_data['mode']
                 values.append(inertia_data['values'])
@@ -73,11 +74,11 @@ def box_plot(tests):
             plt.ylabel('Wartości danych')
             plt.title(f'Odchylenie standardowe - Funkcja {f_id} ({function_type})')
             plt.savefig(f'./wykresy/2box_plot{f_id}.png', format='png')
-            plt.show()
+    plt.show()
 
 
 def analiza():
-    file_path = './results/param_json.json'
+    file_path = './results/results.json'
     results_data = read_json(file_path)
     benchmark_data = results_data.get('benchmark', {})
     tests = benchmark_data.get('tests', [])

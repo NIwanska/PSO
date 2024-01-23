@@ -5,12 +5,8 @@ common:
   draw_online: False 
   initial_inertia_weight: 0.72984
   max_iterations: 60
-  num_tests: 500
+  num_tests: 100
   num_particles: 25
-
-specific:
-  inertia_mode: 1
-  fun: 1
 
 # inertia:
 # 1 - stała

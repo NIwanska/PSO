@@ -100,10 +100,9 @@ def make_test(f_ammount, inertia_modes, params):
 if __name__ == '__main__':
     print("benchmark started")
     param_path = "./parameters/general_params.yaml"
-    save_file_path = "./results/param_json.json"
+    save_file_path = "./results/results.json"
 
     common_params = fh.get_yaml_params(param_path, "common")
-    specific_params = fh.get_yaml_params(param_path, "specific")
 
     f_ammount = 6
     inertia_modes = 4
