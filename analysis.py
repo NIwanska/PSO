@@ -1,6 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 
 def read_json(file_path):
@@ -12,6 +13,7 @@ def read_json(file_path):
 def CDF(tests):
     for test in tests:
         common_params = test.get('common parameters', {})
+        dimensions = common_params['dimensions']
         results = test.get('results', [])
         for result in results:
             f_id = result['f_id']
@@ -28,13 +30,14 @@ def CDF(tests):
             plt.xlabel('Iteracje')
             plt.ylabel('Funkcja celu')
             plt.legend()
-            plt.savefig(f'./wykresy/krzywa_zbiegania{f_id}.png', format='png')
+            plt.savefig(f'./charts/{dimensions}krzywa_zbiegania{f_id}.png', format='png')
     plt.show()
 
 
 def ECDF(tests):
     for test in tests:
         common_params = test.get('common parameters', {})
+        dimensions = common_params['dimensions']
         results = test.get('results', [])
         for result in results:
             f_id = result['f_id']
@@ -52,13 +55,14 @@ def ECDF(tests):
             plt.ylabel('Dystrybuanta empiryczna')
             plt.title(f'Krzywa ECDF - Funkcja {f_id} ({function_type})')
             plt.legend()
-            plt.savefig(f'./wykresy/krzywa_ecdf{f_id}.png', format='png')
+            plt.savefig(f'./charts/{dimensions}krzywa_ecdf{f_id}.png', format='png')
     plt.show()
 
 
 def box_plot(tests):
     for test in tests:
         common_params = test.get('common parameters', {})
+        dimensions = common_params['dimensions']
         results = test.get('results', [])
         for result in results:
             f_id = result['f_id']
@@ -73,11 +77,17 @@ def box_plot(tests):
             plt.xlabel('Zbiory danych')
             plt.ylabel('Wartości danych')
             plt.title(f'Odchylenie standardowe - Funkcja {f_id} ({function_type})')
-            plt.savefig(f'./wykresy/2box_plot{f_id}.png', format='png')
+            plt.savefig(f'./charts/{dimensions}box_plot{f_id}.png', format='png')
     plt.show()
 
 
 def analiza():
+    try:
+        os.mkdir('charts')
+    except FileExistsError:
+        pass
+    except Exception as e:
+        print(f"Wystąpił błąd: {e}")
     file_path = './results/results.json'
     results_data = read_json(file_path)
     benchmark_data = results_data.get('benchmark', {})

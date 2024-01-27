@@ -42,10 +42,13 @@ def save_results(file_path, test_results, clear=True):
         "common parameters": common,
         "results": []
     }
-
+    fun_amount = 6
     results_list = new_content["results"]
 
-    fun_amount = 6
+    dimensions = common['dimensions']
+    if dimensions > 2:
+        fun_amount = 4
+    
     for f_id in range(fun_amount):
 
         cur_result = {

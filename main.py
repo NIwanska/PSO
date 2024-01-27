@@ -42,7 +42,7 @@ def benchmark(params, fun, inertia_mode):
     return best_fitnesses, times, histories, worst_fitness, best_best_fitness
 
 
-def make_test(f_ammount, inertia_modes, params):
+def make_test(dimensions, f_ammount, inertia_modes, params):
 
     values = []
     times = []
@@ -55,6 +55,8 @@ def make_test(f_ammount, inertia_modes, params):
 
     for f_id in range(f_ammount):
 
+        if dimensions > 2 and (f_id+1 == 5 or f_id+1 == 6):
+            continue
         values.append([])
         times.append([])
         average.append([])
@@ -63,6 +65,7 @@ def make_test(f_ammount, inertia_modes, params):
         histories.append([])
         worst_fitness.append([])
         best_fitness.append([])
+
 
         for mode in range(inertia_modes):
 
@@ -106,10 +109,11 @@ if __name__ == '__main__':
 
     f_ammount = 6
     inertia_modes = 4
+    dimensions = common_params['dimensions']
 
     start_time = time.time()
 
-    results = make_test(f_ammount, inertia_modes, common_params)
+    results = make_test(dimensions, f_ammount, inertia_modes, common_params)
     fh.save_results(save_file_path, results)
 
     end_time = time.time()

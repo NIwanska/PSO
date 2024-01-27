@@ -1,11 +1,11 @@
 common:
   c1:  1.496
   c2:  1.496
-  dimensions: 2
+  dimensions: 10
   draw_online: False 
   initial_inertia_weight: 0.72984
-  max_iterations: 60
-  num_tests: 100
+  max_iterations: 200
+  num_tests: 300
   num_particles: 25
 
 # inertia:
